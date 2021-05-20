@@ -1,0 +1,58 @@
+{
+  "name": "pollen-solutions/wp-kernel",
+    "description": "Pollen Wordpress Kernel Component",
+  "homepage": "https://www.presstify.com/pollen-solutions/wp-kernel/",
+  "keywords": [
+    "pollen-solutions",
+    "component",
+    "wordpress",
+    "kernel"
+  ],
+  "time": "2021-05-20",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jordy Manner",
+      "email": "jordy@presstify.com",
+      "role": "Developper"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://composer.presstify.com/pollen-solutions/"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "composer/installers": "~1.0",
+    "pollen-solutions/kernel": "^1.0",
+    "pollen-solutions/wp-comment": "^1.0",
+    "pollen-solutions/wp-db": "^1.0",
+    "pollen-solutions/wp-hook": "^1.0",
+    "pollen-solutions/wp-post": "^1.0",
+    "pollen-solutions/wp-term": "^1.0",
+    "pollen-solutions/wp-user": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.0",
+    "roave/security-advisories": "dev-latest"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pollen\\WpKernel\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Pollen\\WpKernel\\Test\\": "tests"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  }
+}
