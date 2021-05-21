@@ -1,0 +1,26 @@
+#submitdiv {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 0;
+    min-width: 255px;
+
+    background: none repeat scroll 0 0 #FFF;
+    border: 1px solid #E5E5E5;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    line-height: 1;
+}
+
+#submitdiv h3 {
+    margin: 0;
+    padding: 8px 12px;
+
+    font-size: 14px;
+    line-height: 1.4;
+    border-bottom: 1px solid #eee;
+}
+
+#submitdiv .submit {
+    margin: 0;
+    padding: 10px;
+    clear: both;
+}
