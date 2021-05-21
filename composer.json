@@ -8,7 +8,7 @@
     "wordpress",
     "kernel"
   ],
-  "time": "2021-05-20",
+  "time": "2021-05-21",
   "license": "MIT",
   "authors": [
     {
@@ -39,6 +39,9 @@
     "roave/security-advisories": "dev-latest"
   },
   "autoload": {
+    "files": [
+      "src/helpers.php"
+    ],
     "psr-4": {
       "Pollen\\WpKernel\\": "src"
     }

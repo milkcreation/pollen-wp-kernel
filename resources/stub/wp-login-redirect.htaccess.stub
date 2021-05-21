@@ -1,0 +1,12 @@
+# BEGIN WpLoginRedirect
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^{{private_key}}_login/? /wp-login.php [QSA,L]
+RewriteRule ^{{private_key}}_logout/? /wp-login.php?action=logout [QSA,L]
+RewriteRule ^{{private_key}}_resetpass/? /wp-login.php?action=resetpass [QSA,L]
+RewriteRule ^{{private_key}}_lostpassword/? /wp-login.php?action=lostpassword [QSA,L]
+RewriteRule ^{{private_key}}_register/? /wp-login.php?action=register [QSA,L]
+RewriteRule ^{{private_key}}_postpass/? /wp-login.php?action=postpass [QSA,L]
+</IfModule>
+# END WpLoginRedirect
