@@ -64,12 +64,8 @@ class WpKernel extends Kernel
             throw new WpRuntimeException('ABSPATH Constant is missing.');
         }
 
-        if (file_exists(ABSPATH . 'wp-admin/includes/translation-install.php')) {
-            require_once(ABSPATH . 'wp-admin/includes/translation-install.php');
-        }
-
         Locale::set(get_locale());
-        Locale::setLanguages(wp_get_available_translations() ?: []);
+        Locale::setLanguages(get_site_transient('available_translations') ?: []);
 
         global $locale;
         DateTime::setLocale($locale);
