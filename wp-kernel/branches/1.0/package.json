@@ -10,6 +10,9 @@
   "devDependencies": {
   },
   "dependencies": {
-    "@pollen-solutions/kernel": "file:../../pollen-solutions/kernel/"
+    "@pollen-solutions/field": "file:../../pollen-solutions/field/",
+    "@pollen-solutions/metabox": "file:../../pollen-solutions/metabox/",
+    "@pollen-solutions/partial": "file:../../pollen-solutions/partial/",
+    "@pollen-solutions/support": "file:../../pollen-solutions/support/"
   }
 }
