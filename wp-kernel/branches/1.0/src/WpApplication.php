@@ -75,12 +75,13 @@ class WpApplication extends Application implements WpApplicationInterface
             define('LOGGED_IN_SALT', Env::get('LOGGED_IN_SALT', ''));
             define('NONCE_SALT', Env::get('NONCE_SALT', ''));
 
-            defined('WP_DIR') ?: define('WP_DIR', Env::get('WP_DIR') ?? 'wordpress');
+            defined('APP_WP_DIR') ?: define('APP_WP_DIR', Env::get('APP_WP_DIR') ?? 'wordpress');
             define('WP_HOME', Env::get('APP_URL') ?? 'http://127.0.0.1:8000');
-            define('WP_SITEURL', WP_HOME . '/' . WP_DIR);
+            define('WP_SITEURL', WP_HOME . '/' . APP_WP_DIR);
 
-            define('WP_CONTENT_DIR', $this->publicPath);
-            define('WP_CONTENT_URL', WP_HOME);
+            $wpPublicDir = Env::get('APP_WP_PUBLIC_DIR', '/');
+            define('WP_CONTENT_DIR', fs::normalizePath($this->publicPath . fs::DS . $wpPublicDir));
+            define('WP_CONTENT_URL', WP_HOME . '/' . $wpPublicDir);
 
             define('EMPTY_TRASH_DAYS', Env::get('EMPTY_TRASH_DAYS', 7));
 
@@ -120,7 +121,7 @@ class WpApplication extends Application implements WpApplicationInterface
             }
 
             if (!defined('ABSPATH')) {
-                define('ABSPATH', fs::normalizePath($this->publicPath . fs::DS . WP_DIR));
+                define('ABSPATH', fs::normalizePath($this->basePath . fs::DS . $this->publicDir . fs::DS . APP_WP_DIR));
             }
         }
     }
