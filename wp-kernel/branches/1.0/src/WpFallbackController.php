@@ -12,16 +12,17 @@ use Pollen\Support\Str;
 use Pollen\Routing\BaseViewController;
 use Pollen\Routing\Exception\HttpExceptionInterface;
 use Pollen\Routing\Exception\NotFoundException;
-use Pollen\View\ViewEngine;
+use Pollen\View\Engines\Plates\PlatesViewEngine;
+use Pollen\View\View;
 
 class WpFallbackController extends BaseViewController
 {
     /**
      * Cartographie des méthodes de récupération des gabarits d'affichage
      * @see ./wp-includes/template-loader.php
-     * @var array
+     * @var array<string, string>
      */
-    protected $wpTemplateTags = [
+    protected array $wpTemplateTags = [
         'is_embed'             => 'get_embed_template',
         'is_404'               => 'get_404_template',
         'is_search'            => 'get_search_template',
@@ -131,13 +132,19 @@ class WpFallbackController extends BaseViewController
                 $template
             );
 
-            $viewEngine = new ViewEngine();
-            if ($container = $this->getContainer()) {
-                $viewEngine->setContainer($container);
-            }
-            $viewEngine->setDirectory(get_template_directory());
+            $view = View::createFromPlates(
+            function (PlatesViewEngine $platesViewEngine) {
+                $platesViewEngine
+                    ->setFileExtension('php')
+                    ->setDirectory(get_template_directory());
+                if ($container = $this->getContainer()) {
+                    $platesViewEngine->setContainer($container);
+                }
 
-            return $this->response($viewEngine->render(pathinfo($template, PATHINFO_FILENAME)));
+                return $platesViewEngine;
+            });
+
+            return $this->response($view->render(pathinfo($template, PATHINFO_FILENAME)));
         }
         return null;
     }
@@ -147,7 +154,7 @@ class WpFallbackController extends BaseViewController
      *
      * @return string
      */
-    protected function viewEngineDirectory(): string
+    protected function viewDirectory(): string
     {
         return get_template_directory();
     }
