@@ -34,6 +34,14 @@ use Pollen\WpUser\WpUserManagerInterface;
 class WpApplication extends Application implements WpApplicationInterface
 {
     /**
+     * @return void
+     */
+    public function __construct(string $basePath)
+    {
+        parent::__construct($basePath);
+    }
+
+    /**
      * Initialisation.
      *
      * @return void

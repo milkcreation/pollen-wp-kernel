@@ -1,6 +1,6 @@
 <?php
 /**
- * @var Pollen\Field\FieldViewLoaderInterface $this
+ * @var Pollen\Field\FieldTemplate $this
  * @var array $post_types
  * @var array $query_args
  */

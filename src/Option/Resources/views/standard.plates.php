@@ -1,6 +1,6 @@
 <?php
 /**
- * @var Pollen\WpKernel\Option\OptionPageViewLoader $this
+ * @var Pollen\WpKernel\Option\OptionPageTemplate $this
  */
 ?>
 <div>
