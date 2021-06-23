@@ -35,7 +35,8 @@ class WpDebug
             function () {
                 if ($this->debug->debugBar()->isEnabled()) {
                     echo "<!-- DebugBar -->";
-                    echo $this->debug->debugBar()->renderHead();
+                    echo $this->debug->debugBar()->renderHeadCss();
+                    echo $this->debug->debugBar()->renderHeadJs();
                     echo "<!-- / DebugBar -->";
                 }
             },
@@ -57,7 +58,8 @@ class WpDebug
             function () {
                 if ($this->debug->debugBar()->isEnabled()) {
                     echo "<!-- Debug -->";
-                    echo $this->debug->debugBar()->renderHead();
+                    echo $this->debug->debugBar()->renderHeadCss();
+                    echo $this->debug->debugBar()->renderHeadJs();
                     echo "<!-- / Debug -->";
                 }
             },
