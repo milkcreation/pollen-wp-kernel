@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Pollen\WpKernel\Option;
 
 use Pollen\Support\ParamsBag;
-use Pollen\View\View;
+use Pollen\Support\Proxy\ViewProxy;
 use Pollen\View\Engines\Plates\PlatesViewEngine;
-use Pollen\View\ViewInterface;
 use WP_Admin_Bar;
 
 class OptionPage extends ParamsBag implements OptionPageInterface
 {
+    use ViewProxy;
+
     /**
      * Nom de qualification.
      */
@@ -21,11 +22,6 @@ class OptionPage extends ParamsBag implements OptionPageInterface
      * Instance du gestionnaire d'options.
      */
     protected ?OptionInterface $manager = null;
-
-    /**
-     * Instance du moteur de gabarits d'affichage.
-     */
-    protected ViewInterface $view;
 
     /**
      * CONSTRUCTEUR.
@@ -242,30 +238,29 @@ class OptionPage extends ParamsBag implements OptionPageInterface
     public function view(?string $name = null, array $datas = [])
     {
         if ($this->view === null) {
-            $this->view = View::createFromPlates(
-                function (PlatesViewEngine $platesViewEngine) {
-                    $directory = class_info($this->manager)->getDirname() . '/Resources/views/';
+            $directory = class_info($this->manager)->getDirname() . '/Resources/views/';
 
-                    $params = array_merge(
-                        [
-                            'directory' => $directory
-                        ],
-                        config('options.view', []),
-                        $this->get('view', [])
-                    );
-
-                    $platesViewEngine
-                        ->setTemplateClass(OptionPageTemplate::class)
-                        ->setDelegate($this)
-                        ->setDelegateMixin('isSettingPage')
-                        ->setDirectory($params['directory']);
-
-                    if (isset($params['override_dir'])) {
-                        $platesViewEngine->setOverrideDir($params['override_dir']);
-                    }
-
-                }
+            $params = array_merge(
+                [
+                    'directory' => $directory
+                ],
+                config('options.view', []),
+                $this->get('view', [])
             );
+
+            $viewEngine = new PlatesViewEngine();
+
+            $viewEngine
+                ->setTemplateClass(OptionPageTemplate::class)
+                ->setDelegate($this)
+                ->setDelegateMixin('isSettingPage')
+                ->setDirectory($params['directory']);
+
+            if (isset($params['override_dir'])) {
+                $viewEngine->setOverrideDir($params['override_dir']);
+            }
+
+            $this->view = $this->viewManager()->createView($viewEngine);
         }
 
         if (func_num_args() === 0) {

@@ -8,12 +8,15 @@ use League\Route\Http\Exception\HttpExceptionInterface as BaseHttpExceptionInter
 use League\Route\Http\Exception\NotFoundException as BaseNotFoundException;
 use Pollen\Http\Response;
 use Pollen\Http\ResponseInterface;
+use Pollen\Support\ProxyResolver;
 use Pollen\Support\Str;
 use Pollen\Routing\BaseViewController;
 use Pollen\Routing\Exception\HttpExceptionInterface;
 use Pollen\Routing\Exception\NotFoundException;
 use Pollen\View\Engines\Plates\PlatesViewEngine;
-use Pollen\View\View;
+use Pollen\View\ViewManager;
+use Pollen\View\ViewManagerInterface;
+use RuntimeException;
 
 class WpFallbackController extends BaseViewController
 {
@@ -132,30 +135,19 @@ class WpFallbackController extends BaseViewController
                 $template
             );
 
-            $view = View::createFromPlates(
-            function (PlatesViewEngine $platesViewEngine) {
-                $platesViewEngine
-                    ->setFileExtension('php')
-                    ->setDirectory(get_template_directory());
-                if ($container = $this->getContainer()) {
-                    $platesViewEngine->setContainer($container);
-                }
-
-                return $platesViewEngine;
-            });
+            try {
+                $viewManager = ViewManager::getInstance();
+            } catch (RuntimeException $e) {
+                $viewManager = ProxyResolver::getInstance(
+                    ViewManagerInterface::class,
+                    ViewManager::class,
+                    method_exists($this, 'getContainer') ? $this->getContainer() : null
+                );
+            }
+            $view = $viewManager->createView((new PlatesViewEngine('php'))->setDirectory(get_template_directory()));
 
             return $this->response($view->render(pathinfo($template, PATHINFO_FILENAME)));
         }
         return null;
-    }
-
-    /**
-     * Répertoire des gabarits d'affichage.
-     *
-     * @return string
-     */
-    protected function viewDirectory(): string
-    {
-        return get_template_directory();
     }
 }

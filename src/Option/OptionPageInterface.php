@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Pollen\WpKernel\Option;
 
 use Pollen\Support\ParamsBagInterface;
+use Pollen\Support\Proxy\ViewProxyInterface;
 
-interface OptionPageInterface extends ParamsBagInterface
+interface OptionPageInterface extends ParamsBagInterface, ViewProxyInterface
 {
     /**
      * Résolution de sortie de la classe en tant que chaîne de caractère.
