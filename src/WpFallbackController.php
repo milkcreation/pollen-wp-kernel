@@ -144,7 +144,8 @@ class WpFallbackController extends BaseViewController
                     method_exists($this, 'getContainer') ? $this->getContainer() : null
                 );
             }
-            $view = $viewManager->createView((new PlatesViewEngine('php'))->setDirectory(get_template_directory()));
+            $view = $viewManager->createView('plates', ['extension' => 'php'])
+                 ->setDirectory(get_template_directory());
 
             return $this->response($view->render(pathinfo($template, PATHINFO_FILENAME)));
         }
