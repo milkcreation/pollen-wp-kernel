@@ -13,8 +13,7 @@
   "authors": [
     {
       "name": "Jordy Manner",
-      "email": "jordy@presstify.com",
-      "role": "Developper"
+      "email": "jordy@presstify.com"
     }
   ],
   "repositories": [
@@ -24,7 +23,7 @@
     }
   ],
   "require": {
-    "php": ">=7.4",
+    "php": "^7.4 || ^8.0",
     "composer/installers": "~1.0",
     "pollen-solutions/kernel": "^1.0",
     "pollen-solutions/wp-env": "^1.0"
