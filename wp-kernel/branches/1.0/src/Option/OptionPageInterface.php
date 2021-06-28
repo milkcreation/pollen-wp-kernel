@@ -6,6 +6,7 @@ namespace Pollen\WpKernel\Option;
 
 use Pollen\Support\ParamsBagInterface;
 use Pollen\Support\Proxy\ViewProxyInterface;
+use Pollen\View\ViewInterface;
 
 interface OptionPageInterface extends ParamsBagInterface, ViewProxyInterface
 {
@@ -79,14 +80,12 @@ interface OptionPageInterface extends ParamsBagInterface, ViewProxyInterface
     public function setName(string $name): OptionPageInterface;
 
     /**
-     * Récupération de la vue.
-     * {@internal Si aucun argument n'est passé à la méthode, retourne l'intance du controleur principal.}
-     * {@internal Sinon récupére le gabarit d'affichage et passe les variables en argument.}
+     * Resolve view instance or return a particular template render.
      *
-     * @param null|string $name
-     * @param array $datas
+     * @param string|null $name.
+     * @param array $data
      *
-     * @return ViewEngine|string
+     * @return ViewInterface|string
      */
-    public function view(?string $name= null, array $datas = []);
+    public function view(?string $name = null, array $data = []);
 }

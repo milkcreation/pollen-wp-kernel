@@ -1,6 +1,6 @@
 <?php
 /**
- * @var Pollen\WpKernel\Option\OptionPageTemplate $this
+ * @var Pollen\WpKernel\Option\OptionPageTemplateInterface $this
  */
 ?>
 <div class="wrap">

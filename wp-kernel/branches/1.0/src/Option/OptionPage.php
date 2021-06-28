@@ -6,7 +6,7 @@ namespace Pollen\WpKernel\Option;
 
 use Pollen\Support\ParamsBag;
 use Pollen\Support\Proxy\ViewProxy;
-use Pollen\View\Engines\Plates\PlatesViewEngine;
+use Pollen\View\ViewInterface;
 use WP_Admin_Bar;
 
 class OptionPage extends ParamsBag implements OptionPageInterface
@@ -22,6 +22,11 @@ class OptionPage extends ParamsBag implements OptionPageInterface
      * Instance du gestionnaire d'options.
      */
     protected ?OptionInterface $manager = null;
+
+    /**
+     * Template view instance.
+     */
+    protected ?ViewInterface $view = null;
 
     /**
      * CONSTRUCTEUR.
@@ -248,19 +253,14 @@ class OptionPage extends ParamsBag implements OptionPageInterface
                 $this->get('view', [])
             );
 
-            $viewEngine = new PlatesViewEngine();
-
-            $viewEngine
-                ->setTemplateClass(OptionPageTemplate::class)
-                ->setDelegate($this)
-                ->setDelegateMixin('isSettingPage')
+            $this->view = $this->viewManager()->createView('plates')
                 ->setDirectory($params['directory']);
 
-            if (isset($params['override_dir'])) {
-                $viewEngine->setOverrideDir($params['override_dir']);
+            if (!empty($params['override_dir'])) {
+                $this->view->setOverrideDir($params['override_dir']);
             }
 
-            $this->view = $this->viewManager()->createView($viewEngine);
+            $this->view->addExtension('isSettingPage', [$this, 'isSettingsPage']);
         }
 
         if (func_num_args() === 0) {
