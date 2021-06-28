@@ -1,6 +1,6 @@
 <?php
 /**
- * @var Pollen\WpKernel\Option\OptionPageTemplate $this
+ * @var Pollen\WpKernel\Option\OptionPageTemplateInterface $this
  */
 ?>
 <div style="margin-right:300px; margin-top:20px;">

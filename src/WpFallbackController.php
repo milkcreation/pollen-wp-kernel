@@ -13,7 +13,6 @@ use Pollen\Support\Str;
 use Pollen\Routing\BaseViewController;
 use Pollen\Routing\Exception\HttpExceptionInterface;
 use Pollen\Routing\Exception\NotFoundException;
-use Pollen\View\Engines\Plates\PlatesViewEngine;
 use Pollen\View\ViewManager;
 use Pollen\View\ViewManagerInterface;
 use RuntimeException;
@@ -144,8 +143,9 @@ class WpFallbackController extends BaseViewController
                     method_exists($this, 'getContainer') ? $this->getContainer() : null
                 );
             }
-            $view = $viewManager->createView('plates', ['extension' => 'php'])
-                 ->setDirectory(get_template_directory());
+            $view = $viewManager->createView('plates')
+                 ->setDirectory(get_template_directory())
+                 ->setFileExtension('php');
 
             return $this->response($view->render(pathinfo($template, PATHINFO_FILENAME)));
         }
