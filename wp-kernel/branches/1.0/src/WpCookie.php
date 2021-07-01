@@ -8,7 +8,6 @@ use Pollen\Cookie\CookieJarInterface;
 use Pollen\Support\Proxy\ContainerProxy;
 use Pollen\WpKernel\Exception\WpRuntimeException;
 use Psr\Container\ContainerInterface as Container;
-use RuntimeException;
 use WP_Site;
 
 class WpCookie

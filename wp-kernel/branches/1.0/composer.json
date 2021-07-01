@@ -8,7 +8,7 @@
     "wordpress",
     "kernel"
   ],
-  "time": "2021-06-28",
+  "time": "2021-07-01",
   "license": "MIT",
   "authors": [
     {
@@ -24,7 +24,6 @@
   ],
   "require": {
     "php": "^7.4 || ^8.0",
-    "composer/installers": "~1.0",
     "pollen-solutions/kernel": "^1.0",
     "pollen-solutions/wp-env": "^1.0"
   },

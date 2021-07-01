@@ -8,6 +8,7 @@ use Pollen\Asset\AssetManagerInterface;
 use Pollen\Cookie\CookieJarInterface;
 use Pollen\Database\DatabaseManagerInterface;
 use Pollen\Debug\DebugManagerInterface;
+use Pollen\Faker\FakerInterface;
 use Pollen\Field\FieldManagerInterface;
 use Pollen\Filesystem\StorageManagerInterface;
 use Pollen\Form\FormManagerInterface;
@@ -97,6 +98,10 @@ class WpApplication extends Application implements WpApplicationInterface
 
         if ($this->has(DatabaseManagerInterface::class)) {
             new WpDatabase($this->get(DatabaseManagerInterface::class), $this);
+        }
+
+        if ($this->has(FakerInterface::class)) {
+            new WpFaker($this->get(FakerInterface::class), $this);
         }
 
         if ($this->has(FieldManagerInterface::class)) {
