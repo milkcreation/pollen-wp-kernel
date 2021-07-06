@@ -68,12 +68,11 @@ class WpAsset
         global $locale;
         $this->asset->addGlobalJsVar('locale', $locale);
 
-        /*
+
         add_action(
             'wp_head',
             function () {
-                echo $this->asset->headStyles();
-                echo $this->asset->headScripts();
+                echo $this->asset->getHead();
             },
             5
         );
@@ -81,37 +80,28 @@ class WpAsset
         add_action(
             'wp_footer',
             function () {
-                echo $this->asset->footerScripts();
+                echo $this->asset->getFooter();
             },
             5
         );
 
         add_action(
-            'admin_print_styles',
-            function () {
-                echo $this->asset->headStyles();
-            }
-        );
-
-        add_action(
             'admin_print_scripts',
             function () {
-                echo $this->asset->headScripts();
+                echo $this->asset->getHead();
             }
         );
 
         add_action(
             'admin_print_footer_scripts',
             function () {
-                echo $this->asset->footerScripts();
+                echo $this->asset->getFooter();
             }
         );
-        */
 
-        remove_action('wp_head', 'wp_print_styles', 8);
-        // @todo
+        // remove_action('wp_head', 'wp_print_styles', 8);
         // remove_action('wp_head', 'wp_print_head_scripts', 9);
-        remove_action('wp_footer', 'wp_print_footer_scripts', 20);
+        // remove_action('wp_footer', 'wp_print_footer_scripts', 20);
 
         add_action('wp_head', [$this, 'wpHeadStylesAsAsset']);
         add_action('wp_footer', [$this, 'wpFooterScriptsAsAsset']);
