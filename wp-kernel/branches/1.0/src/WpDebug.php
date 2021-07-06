@@ -26,57 +26,5 @@ class WpDebug
     {
         $this->debug = $debug;
         $this->setContainer($container);
-
-        if (!function_exists('add_action')) {
-            return;
-        }
-
-        if ($this->debug->config('asset.autoloader', true) === true) {
-            add_action(
-                'wp_head',
-                function () {
-                    if ($this->debug->debugBar()->isEnabled()) {
-                        echo "<!-- DebugBar -->";
-                        echo $this->debug->debugBar()->renderHeadCss();
-                        echo $this->debug->debugBar()->renderHeadJs();
-                        echo "<!-- / DebugBar -->";
-                    }
-                },
-                999999
-            );
-
-            add_action(
-                'wp_footer',
-                function () {
-                    if ($this->debug->debugBar()->isEnabled()) {
-                        echo $this->debug->debugBar()->render();
-                    }
-                },
-                999999
-            );
-
-            add_action(
-                'admin_head',
-                function () {
-                    if ($this->debug->debugBar()->isEnabled()) {
-                        echo "<!-- Debug Bar -->";
-                        echo $this->debug->debugBar()->renderHeadCss();
-                        echo $this->debug->debugBar()->renderHeadJs();
-                        echo "<!-- / Debug Bar -->";
-                    }
-                },
-                999999
-            );
-
-            add_action(
-                'admin_footer',
-                function () {
-                    if ($this->debug->debugBar()->isEnabled()) {
-                        echo $this->debug->debugBar()->render();
-                    }
-                },
-                999999
-            );
-        }
     }
 }
