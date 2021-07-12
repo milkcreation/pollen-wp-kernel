@@ -99,6 +99,7 @@ class WpAsset
             }
         );
 
+        // @todo remove native enqueue to prevent duplicate
         // remove_action('wp_head', 'wp_print_styles', 8);
         // remove_action('wp_head', 'wp_print_head_scripts', 9);
         // remove_action('wp_footer', 'wp_print_footer_scripts', 20);
@@ -126,7 +127,7 @@ class WpAsset
             return;
         }
 
-        $styleHandles = $this->wpDependencyDoItems($wp_styles);
+        $styleHandles = $this->wpDependencyDoItems(clone $wp_styles);
 
         foreach ($styleHandles as $handle) {
             $wpDep = $wp_styles->query($handle);
@@ -166,7 +167,7 @@ class WpAsset
         script_concat_settings();
         $wp_scripts->do_concat = $concatenate_scripts;
 
-        $scriptHandles = $this->wpDependencyDoItems($wp_scripts);
+        $scriptHandles = $this->wpDependencyDoItems(clone $wp_scripts);
 
         foreach ($scriptHandles as $handle) {
             $wpDep = $wp_scripts->query($handle);
