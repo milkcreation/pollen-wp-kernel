@@ -1,0 +1,70 @@
+// Variables
+@import "~@pollen-solutions/field/resources/assets/src/scss/variables";
+
+// Dependencies
+@import "~@pollen-solutions/partial/resources/assets/src/scss/media-library";
+
+// Customization
+[aria-selected="false"] > [data-control="media-image.remove"] {
+  display:none;
+}
+
+[aria-selected="true"] > [data-control="media-image.remove"] {
+  display:inherit;
+}
+
+.FieldMediaImage {
+  position: relative;
+  text-align: center;
+  background-color: #F4F4F4;
+  border: dashed 3px #DDD;
+}
+
+.FieldMediaImage-open {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  z-index: 5;
+}
+
+.FieldMediaImage-preview {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+  background-size: cover;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+.FieldMediaImage[data-format="contain"] .FieldMediaImage-preview {
+  background-size: contain;
+}
+
+.FieldMediaImage-info {
+  position: absolute;
+  display: inline-block;
+  bottom: -3px;
+  left: -3px;
+  color: #999;
+  padding: 2px 5px;
+  border: solid 1px #E4E4E4;
+  background-color: #FFF;
+  font-size: 11px;
+  z-index: 6;
+}
+
+.FieldMediaImage-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #BBB;
+  font-size: 14px;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+}

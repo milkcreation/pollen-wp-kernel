@@ -1,0 +1,73 @@
+// Variables
+@import "~@pollen-solutions/field/resources/assets/src/scss/variables";
+
+// Customization
+[data-control="findposts.wrapper"] {
+    position: relative;
+}
+
+input[type=text][data-control="findposts"] {
+    padding-right: 30px;
+    margin: 0;
+    width: 100%;
+    background-color: fieldColor(white);
+    box-shadow: none;
+}
+
+[data-control="findposts.opener"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 30px;
+    padding: 0;
+    display: block;
+    z-index: 1;
+    text-indent: -9999em;
+    overflow: hidden;
+    box-sizing: border-box;
+    cursor: pointer;
+    background: transparent;
+    border:none;
+
+    &::before {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        bottom: 0;
+        margin-top: -10px;
+        width: 26px;
+        display: block;
+        content: "\f179";
+        font: 400 20px/1 Dashicons;
+        z-index: 2;
+        text-align: center;
+        text-indent: 0;
+    }
+}
+
+[data-control="findposts.modal.close"] {
+    width: 36px;
+    height: 36px;
+    border: none;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    text-align: center;
+    background: 0 0;
+    color: #666;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: inherit;
+
+    &::before {
+        font: normal 20px/36px dashicons;
+        vertical-align: top;
+        speak: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        content: "\f158";
+    }
+}

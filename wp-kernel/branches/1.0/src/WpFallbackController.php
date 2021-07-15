@@ -56,6 +56,30 @@ class WpFallbackController extends BaseViewController
     }
 
     /**
+     * Post-repartiteur de requête HTTP.
+     *
+     * @param ...$args
+     *
+     * @return ResponseInterface|null
+     */
+    public function afterDispatch(...$args): ?ResponseInterface
+    {
+        return null;
+    }
+
+    /**
+     * Pré-repartiteur de requête HTTP.
+     *
+     * @param ...$args
+     *
+     * @return ResponseInterface|null
+     */
+    public function beforeDispatch(...$args): ?ResponseInterface
+    {
+        return null;
+    }
+
+    /**
      * Répartiteur de requête HTTP.
      *
      * @return ResponseInterface
@@ -64,15 +88,26 @@ class WpFallbackController extends BaseViewController
     {
         $args = func_get_args();
 
+        $response = $this->beforeDispatch(...$args);
+        if ($response instanceof ResponseInterface) {
+            return $response;
+        }
+
         foreach (array_keys($this->wpTemplateTags) as $tag) {
             if ($tag() && ($response = $this->handleTag($tag, ...$args))) {
                 return $response;
             }
         }
 
+        $response = $this->afterDispatch(...$args);
+        if ($response instanceof ResponseInterface) {
+            return $response;
+        }
+
         if (!$response = $this->handleTag('is_404', ...$args)) {
             $response = $this->response('Template unavailable', 404);
         }
+
         return $response;
     }
 
