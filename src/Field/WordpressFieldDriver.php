@@ -13,6 +13,6 @@ abstract class WordpressFieldDriver extends FieldDriver implements WordpressFiel
      */
     public function viewDirectory(): string
     {
-        return __DIR__ . '/Resources/views/' . $this->getAlias();
+        return realpath(__DIR__ . '/../../resources/views/field/' . $this->getAlias());
     }
 }

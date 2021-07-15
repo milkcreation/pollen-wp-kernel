@@ -1,0 +1,51 @@
+// Variables
+@import "~@pollen-solutions/field/resources/assets/src/scss/variables";
+
+// Dependencies
+@import '~wp-includes/css/dashicons.css';
+
+// Customization
+.FieldMediaFile-wrap.ThemeInput--media {
+  position: relative;
+  display: block;
+}
+
+.FieldMediaFile-wrap.ThemeInput--media::before {
+  top: 0;
+  bottom: 0;
+}
+
+.FieldMediaFile-addnew {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-indent: -999999em;
+  display: none;
+  z-index:1;
+}
+
+[aria-active="false"] .FieldMediaFile-addnew {
+  display: inherit;
+}
+
+
+.FieldMediaFile-reset.ThemeButton--close {
+  position: absolute;
+  top:50%;
+  left:2px;
+  width:16px;
+  height:16px;
+  margin-top:-8px;
+  display:none;
+}
+
+[aria-active="true"] {
+  & .FieldMediaFile {
+    padding-left:20px;
+  }
+  & .FieldMediaFile-reset.ThemeButton--close {
+    display: inherit;
+  }
+}
