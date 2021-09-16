@@ -1,25 +1,19 @@
 {
   "name": "pollen-solutions/wp-kernel",
-    "description": "Pollen Wordpress Kernel Component",
-  "homepage": "https://www.presstify.com/pollen-solutions/wp-kernel/",
+  "description": "Pollen Wordpress Kernel Component",
+  "homepage": "https://github.com/milkcreation/pollen-wp-kernel.git",
   "keywords": [
     "pollen-solutions",
     "component",
     "wordpress",
     "kernel"
   ],
-  "time": "2021-07-15",
+  "time": "2021-09-15",
   "license": "MIT",
   "authors": [
     {
       "name": "Jordy Manner",
       "email": "jordy@presstify.com"
-    }
-  ],
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://composer.presstify.com/pollen-solutions/"
     }
   ],
   "require": {
